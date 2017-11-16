@@ -5,6 +5,75 @@ from sklearn import tree
 import collections
 import seaborn as sns
 import numpy as np
+from matplotlib.colors import LinearSegmentedColormap
+
+
+def draw_linear_regression_function(reg, ax=None, **kwargs):
+    if not ax:
+        ax = plt.gca()
+
+    if reg.coef_.ndim > 1:
+        b_1, b_2 = reg.coef_[0, :]
+    else:
+        b_1, b_2 = reg.coef_
+
+    b_0 = reg.intercept_
+
+    # solve the function y = b_0 + b_1*X_1 + b_2 * X_2 for X2
+
+    x_low, x_high = ax.get_xlim()
+    x1s = np.linspace(x_low, x_high)
+    x2s = (0.5 - b_0 - b_1 * x1s) / b_2
+
+    ax.plot(x1s, x2s, **kwargs)
+
+
+def plot_3d_views(X, y, cmap=None):
+    from mpl_toolkits.mplot3d import Axes3D
+
+    if not cmap:
+        cmap = LinearSegmentedColormap.from_list('discrete', colors = [(0.8, 0.2, 0.3), (0.1, 0.8, 0.3), (0, 0.4, 0.8)], N=3)
+
+    fig = plt.figure(figsize=(20, 20))
+    ax = fig.add_subplot(2, 2, 1, projection='3d')
+    ax.scatter(X[:, 0], X[:, 1], X[:, 2], c=y, cmap=cmap)
+    ax.set_xlabel('X1')
+    ax.set_ylabel('X2')
+    ax.set_zlabel('X3')
+    ax.set_xticklabels([])
+    ax.set_yticklabels([])
+    ax.set_zticklabels([])
+
+    ax = fig.add_subplot(2, 2, 2, projection='3d')
+    ax.scatter(X[:, 0], X[:, 1], X[:, 2], c=y, cmap=cmap)
+    ax.view_init(0, 0)
+    ax.set_xlabel('X1')
+    ax.set_ylabel('X2')
+    ax.set_zlabel('X3')
+    ax.set_xticklabels([])
+    ax.set_yticklabels([])
+    ax.set_zticklabels([])
+
+    ax = fig.add_subplot(2, 2, 3, projection='3d')
+    ax.scatter(X[:, 0], X[:, 1], X[:, 2], c=y, cmap=cmap)
+    ax.view_init(0, 90)
+    ax.set_xlabel('X1')
+    ax.set_ylabel('X2')
+    ax.set_zlabel('X3')
+    ax.set_xticklabels([])
+    ax.set_yticklabels([])
+    ax.set_zticklabels([])
+
+    ax = fig.add_subplot(2, 2, 4, projection='3d')
+    ax.scatter(X[:, 0], X[:, 1], X[:, 2], c=y, cmap=cmap)
+    ax.view_init(90, 0)
+    ax.set_xlabel('X1')
+    ax.set_ylabel('X2')
+    ax.set_zlabel('X3')
+    ax.set_xticklabels([])
+    ax.set_yticklabels([])
+    ax.set_zticklabels([])
+    plt.subplots_adjust(wspace=0.05, hspace=0.05)
 
 
 def draw_tree(clf):
@@ -50,20 +119,6 @@ def draw_svm_decission_function(clf, ax=None, **kwargs):
     cs.collections[0].set_label(kwargs.get('label', 'SVM Decission Boundary'))
     plt.axis('off')
 
-
-def draw_linear_regression_function(reg, ax=None, **kwargs):
-    if not ax:
-        ax = plt.gca()
-    b_1, b_2 = reg.coef_
-    b_0 = reg.intercept_
-
-    # solve the function y = b_0 + b_1*X_1 + b_2 * X_2 for X2
-
-    x_low, x_high = ax.get_xlim()
-    x1s = np.linspace(x_low, x_high)
-    x2s = (0.5 - b_0 - b_1 * x1s) / b_2
-
-    ax.plot(x1s, x2s, **kwargs)
 
 
 def draw_decission_boundaries(knn, ax=None, cmap='winter', alpha=0.07, **kwargs):
