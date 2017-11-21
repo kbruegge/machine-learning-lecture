@@ -8,6 +8,22 @@ import numpy as np
 from matplotlib.colors import LinearSegmentedColormap
 
 
+def set_plot_style():
+
+    sns.reset_orig()
+
+    plt.rcParams['figure.figsize'] = (12, 8)
+    plt.rcParams['font.size'] = 14
+    plt.rcParams['lines.linewidth'] = 2
+    plt.rcParams['xtick.labelsize'] = 13
+    plt.rcParams['ytick.labelsize'] = 13
+    plt.rcParams['axes.labelsize'] = 14
+    plt.rcParams['axes.titlesize'] = 14
+    plt.rcParams['legend.fontsize'] = 13
+    plt.rcParams['axes.spines.top'] = False
+    plt.rcParams['axes.spines.right'] = False
+
+
 def draw_linear_regression_function(reg, ax=None, **kwargs):
     if not ax:
         ax = plt.gca()
