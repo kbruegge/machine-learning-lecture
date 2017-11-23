@@ -5,6 +5,7 @@ from sklearn import tree
 import collections
 import seaborn as sns
 import numpy as np
+import pandas as pd
 from matplotlib.colors import LinearSegmentedColormap
 
 
@@ -101,7 +102,7 @@ def draw_tree(clf):
     )
     graph = pydotplus.graph_from_dot_data(d)
 
-    colors = ('limegreen', 'dodgerblue')
+    colors = ('red', 'dodgerblue')
     edges = collections.defaultdict(list)
 
     for edge in graph.get_edge_list():
@@ -173,10 +174,15 @@ def draw_decission_surface(clf, predictions, label=None):
     plt.axis('off')
 
 
-def plot_bars_and_confusion(truth, prediction, axes=None, vmin=None, vmax=None):
+def plot_bars_and_confusion(truth, prediction, axes=None, vmin=None, vmax=None, cmap='RdPu', title=None, bar_color=None):
     accuracy = accuracy_score(truth, prediction)
     cm = confusion_matrix(truth, prediction)
-
+    
+    if not isinstance(truth, pd.Series):
+        truth = pd.Series(truth)    
+    if not isinstance(prediction, pd.Series):
+        predicted = pd.Series(prediction)
+        
     if not axes:
         fig, axes = plt.subplots(1, 2, figsize=(10, 4))
 
@@ -186,14 +192,17 @@ def plot_bars_and_confusion(truth, prediction, axes=None, vmin=None, vmax=None):
     if not vmax:
         vmax = cm.max()
 
-    (prediction == truth).value_counts().plot.barh(ax=axes[0])
+    if not bar_color:
+        (prediction == truth).value_counts().plot.barh(ax=axes[0], )
+    else:
+        (prediction == truth).value_counts().plot.barh(ax=axes[0], color=bar_color)
     axes[0].text(150, 0.5, 'Accuracy {:0.3f}'.format(accuracy))
 
     sns.heatmap(
         cm,
         annot=True,
         fmt='d',
-        cmap='RdPu',
+        cmap=cmap,
         xticklabels=['No', 'Yes'],
         yticklabels=['No', 'Yes'],
         ax=axes[1],
@@ -202,3 +211,5 @@ def plot_bars_and_confusion(truth, prediction, axes=None, vmin=None, vmax=None):
     )
     axes[1].set_ylabel('Actual')
     axes[1].set_xlabel('Predicted')
+    if title:
+        plt.suptitle(title)
