@@ -194,8 +194,14 @@ def plot_bars_and_confusion(truth, prediction, axes=None, vmin=None, vmax=None, 
 
     if not isinstance(truth, pd.Series):
         truth = pd.Series(truth)
+
     if not isinstance(prediction, pd.Series):
         prediction = pd.Series(prediction)
+
+    correct = pd.Series(truth.values == prediction.values)
+
+    truth.sort_index(inplace=True)
+    prediction.sort_index(inplace=True)
 
     if not axes:
         fig, axes = plt.subplots(1, 2, figsize=(10, 4))
@@ -207,9 +213,10 @@ def plot_bars_and_confusion(truth, prediction, axes=None, vmin=None, vmax=None, 
         vmax = cm.max()
 
     if not bar_color:
-        (prediction == truth).value_counts().plot.barh(ax=axes[0], )
+        correct.value_counts().plot.barh(ax=axes[0])
     else:
-        (prediction == truth).value_counts().plot.barh(ax=axes[0], color=bar_color)
+        correct.value_counts().plot.barh(ax=axes[0], color=bar_color)
+
     axes[0].text(150, 0.5, 'Accuracy {:0.3f}'.format(accuracy))
 
     sns.heatmap(
