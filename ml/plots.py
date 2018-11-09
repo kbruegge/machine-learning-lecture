@@ -24,7 +24,6 @@ def set_plot_style():
     plt.rcParams['axes.spines.top'] = False
     plt.rcParams['axes.spines.right'] = False
 
-    
 
 def twospirals(n_samples, noise=.5):
     """
@@ -33,10 +32,9 @@ def twospirals(n_samples, noise=.5):
     n = np.sqrt(np.random.rand(n_samples,1)) * 360 * (2*np.pi)/360
     d1x = -np.cos(n)*n + np.random.rand(n_samples,1) * noise
     d1y = np.sin(n)*n + np.random.rand(n_samples,1) * noise
-    return (np.vstack((np.hstack((d1x,d1y)),np.hstack((-d1x,-d1y)))), 
+    return (np.vstack((np.hstack((d1x,d1y)),np.hstack((-d1x,-d1y)))),
             np.hstack((np.zeros(n_samples),np.ones(n_samples))))
 
-    
 
 
 def draw_linear_regression_function(reg, ax=None, **kwargs):
@@ -131,7 +129,7 @@ def draw_tree(clf):
     return graph.create(format='png')
 
 
-def draw_svm_decission_function(clf, ax=None, **kwargs):
+def draw_svm_decision_function(clf, ax=None, **kwargs):
     if not ax:
         ax = plt.gca()
 
@@ -147,12 +145,12 @@ def draw_svm_decission_function(clf, ax=None, **kwargs):
 
     # plot decision boundary and margins
     cs = ax.contour(X1, X2, Z, levels=[-1., 0, 1.0], linestyles=['--', '-', '--'], **kwargs)
-    cs.collections[0].set_label(kwargs.get('label', 'SVM Decission Boundary'))
+    cs.collections[0].set_label(kwargs.get('label', 'SVM decision Boundary'))
     plt.axis('off')
 
 
 
-def draw_decission_boundaries(knn, ax=None, cmap='winter', alpha=0.07, **kwargs):
+def draw_decision_boundaries(knn, ax=None, cmap='winter', alpha=0.07, **kwargs):
     if not ax:
         ax = plt.gca()
 
@@ -167,11 +165,11 @@ def draw_decission_boundaries(knn, ax=None, cmap='winter', alpha=0.07, **kwargs)
 
     # plot decision boundary and margins
     cs = ax.contourf(X1, X2, Z, **kwargs, cmap=cmap, alpha=alpha,)
-    cs.collections[0].set_label(kwargs.get('label', 'Decission Boundary'))
+    cs.collections[0].set_label(kwargs.get('label', 'decision Boundary'))
     plt.axis('off')
 
 
-def draw_decission_surface(clf, predictions, label=None):
+def draw_decision_surface(clf, predictions, label=None):
     ax = plt.gca()
     x_low, x_high = ax.get_xlim()
     y_low, y_high = ax.get_ylim()
@@ -191,12 +189,12 @@ def draw_decission_surface(clf, predictions, label=None):
 def plot_bars_and_confusion(truth, prediction, axes=None, vmin=None, vmax=None, cmap='RdPu', title=None, bar_color=None):
     accuracy = accuracy_score(truth, prediction)
     cm = confusion_matrix(truth, prediction)
-    
+
     if not isinstance(truth, pd.Series):
-        truth = pd.Series(truth)    
+        truth = pd.Series(truth)
     if not isinstance(prediction, pd.Series):
-        predicted = pd.Series(prediction)
-        
+        prediction = pd.Series(prediction)
+
     if not axes:
         fig, axes = plt.subplots(1, 2, figsize=(10, 4))
 
