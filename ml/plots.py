@@ -144,8 +144,9 @@ def draw_svm_decision_function(clf, ax=None, **kwargs):
     Z = clf.decision_function(xy).reshape(X1.shape)
 
     # plot decision boundary and margins
+    label = kwargs.pop('label', 'Decision Boundary')
     cs = ax.contour(X1, X2, Z, levels=[-1., 0, 1.0], linestyles=['--', '-', '--'], **kwargs)
-    cs.collections[0].set_label(kwargs.get('label', 'SVM decision Boundary'))
+    cs.collections[0].set_label(label)
     plt.axis('off')
 
 
@@ -163,9 +164,10 @@ def draw_decision_boundaries(knn, ax=None, cmap='winter', alpha=0.07, **kwargs):
     xy = np.vstack([X1.ravel(), X2.ravel()]).T
     Z = knn.predict(xy).reshape(X1.shape)
 
+    label = kwargs.pop('label', 'Decision Boundary')
     # plot decision boundary and margins
     cs = ax.contourf(X1, X2, Z, **kwargs, cmap=cmap, alpha=alpha,)
-    cs.collections[0].set_label(kwargs.get('label', 'decision Boundary'))
+    cs.collections[0].set_label(label)
     plt.axis('off')
 
 
