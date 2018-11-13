@@ -13,28 +13,29 @@ def set_plot_style():
 
     sns.reset_orig()
 
-    plt.rcParams['figure.figsize'] = (12, 8)
-    plt.rcParams['font.size'] = 14
-    plt.rcParams['lines.linewidth'] = 2
-    plt.rcParams['xtick.labelsize'] = 13
-    plt.rcParams['ytick.labelsize'] = 13
-    plt.rcParams['axes.labelsize'] = 14
-    plt.rcParams['axes.titlesize'] = 14
-    plt.rcParams['legend.fontsize'] = 13
-    plt.rcParams['axes.spines.top'] = False
-    plt.rcParams['axes.spines.right'] = False
+    plt.rcParams["figure.figsize"] = (12, 8)
+    plt.rcParams["font.size"] = 14
+    plt.rcParams["lines.linewidth"] = 2
+    plt.rcParams["xtick.labelsize"] = 13
+    plt.rcParams["ytick.labelsize"] = 13
+    plt.rcParams["axes.labelsize"] = 14
+    plt.rcParams["axes.titlesize"] = 14
+    plt.rcParams["legend.fontsize"] = 13
+    plt.rcParams["axes.spines.top"] = False
+    plt.rcParams["axes.spines.right"] = False
 
 
-def twospirals(n_samples, noise=.5):
+def twospirals(n_samples, noise=0.5):
     """
      Returns the two spirals dataset.
     """
-    n = np.sqrt(np.random.rand(n_samples,1)) * 360 * (2*np.pi)/360
-    d1x = -np.cos(n)*n + np.random.rand(n_samples,1) * noise
-    d1y = np.sin(n)*n + np.random.rand(n_samples,1) * noise
-    return (np.vstack((np.hstack((d1x,d1y)),np.hstack((-d1x,-d1y)))),
-            np.hstack((np.zeros(n_samples),np.ones(n_samples))))
-
+    n = np.sqrt(np.random.rand(n_samples, 1)) * 360 * (2 * np.pi) / 360
+    d1x = -np.cos(n) * n + np.random.rand(n_samples, 1) * noise
+    d1y = np.sin(n) * n + np.random.rand(n_samples, 1) * noise
+    return (
+        np.vstack((np.hstack((d1x, d1y)), np.hstack((-d1x, -d1y)))),
+        np.hstack((np.zeros(n_samples), np.ones(n_samples))),
+    )
 
 
 def draw_linear_regression_function(reg, ax=None, **kwargs):
@@ -49,7 +50,6 @@ def draw_linear_regression_function(reg, ax=None, **kwargs):
     b_0 = reg.intercept_
 
     # solve the function y = b_0 + b_1*X_1 + b_2 * X_2 for X2
-
     x_low, x_high = ax.get_xlim()
     x1s = np.linspace(x_low, x_high)
     x2s = (0.5 - b_0 - b_1 * x1s) / b_2
@@ -61,60 +61,59 @@ def plot_3d_views(X, y, cmap=None):
     from mpl_toolkits.mplot3d import Axes3D
 
     if not cmap:
-        cmap = LinearSegmentedColormap.from_list('discrete', colors = [(0.8, 0.2, 0.3), (0.1, 0.8, 0.3), (0, 0.4, 0.8)], N=3)
+        cmap = LinearSegmentedColormap.from_list(
+            "discrete", colors=[(0.8, 0.2, 0.3), (0.1, 0.8, 0.3), (0, 0.4, 0.8)], N=3
+        )
 
     fig = plt.figure(figsize=(20, 20))
-    ax = fig.add_subplot(2, 2, 1, projection='3d')
+    ax = fig.add_subplot(2, 2, 1, projection="3d")
     ax.scatter(X[:, 0], X[:, 1], X[:, 2], c=y, cmap=cmap)
-    ax.set_xlabel('X1')
-    ax.set_ylabel('X2')
-    ax.set_zlabel('X3')
+    ax.set_xlabel("X1")
+    ax.set_ylabel("X2")
+    ax.set_zlabel("X3")
     ax.set_xticklabels([])
     ax.set_yticklabels([])
     ax.set_zticklabels([])
 
-    ax = fig.add_subplot(2, 2, 2, projection='3d')
+    ax = fig.add_subplot(2, 2, 2, projection="3d")
     ax.scatter(X[:, 0], X[:, 1], X[:, 2], c=y, cmap=cmap)
     ax.view_init(0, 0)
-    ax.set_xlabel('X1')
-    ax.set_ylabel('X2')
-    ax.set_zlabel('X3')
+    ax.set_xlabel("X1")
+    ax.set_ylabel("X2")
+    ax.set_zlabel("X3")
     ax.set_xticklabels([])
     ax.set_yticklabels([])
     ax.set_zticklabels([])
 
-    ax = fig.add_subplot(2, 2, 3, projection='3d')
+    ax = fig.add_subplot(2, 2, 3, projection="3d")
     ax.scatter(X[:, 0], X[:, 1], X[:, 2], c=y, cmap=cmap)
     ax.view_init(0, 90)
-    ax.set_xlabel('X1')
-    ax.set_ylabel('X2')
-    ax.set_zlabel('X3')
+    ax.set_xlabel("X1")
+    ax.set_ylabel("X2")
+    ax.set_zlabel("X3")
     ax.set_xticklabels([])
     ax.set_yticklabels([])
     ax.set_zticklabels([])
 
-    ax = fig.add_subplot(2, 2, 4, projection='3d')
+    ax = fig.add_subplot(2, 2, 4, projection="3d")
     ax.scatter(X[:, 0], X[:, 1], X[:, 2], c=y, cmap=cmap)
     ax.view_init(90, 0)
-    ax.set_xlabel('X1')
-    ax.set_ylabel('X2')
-    ax.set_zlabel('X3')
+    ax.set_xlabel("X1")
+    ax.set_ylabel("X2")
+    ax.set_zlabel("X3")
     ax.set_xticklabels([])
     ax.set_yticklabels([])
     ax.set_zticklabels([])
-    plt.subplots_adjust(wspace=0.05, hspace=0.05)
+    plt.subplots_adjust(wspace=0.005, hspace=0.005)
 
 
 def draw_tree(clf):
     import pydotplus
-    d = tree.export_graphviz(
-                clf,
-                out_file=None,
-                filled=True,
-    )
+
+    d = tree.export_graphviz(clf, out_file=None, filled=True)
     graph = pydotplus.graph_from_dot_data(d)
 
-    colors = ('red', 'dodgerblue')
+    colors = ("red", "dodgerblue")
     edges = collections.defaultdict(list)
 
     for edge in graph.get_edge_list():
@@ -126,7 +125,7 @@ def draw_tree(clf):
             dest = graph.get_node(str(edges[edge][i]))[0]
             dest.set_fillcolor(colors[i])
 
-    return graph.create(format='png')
+    return graph.create(format="png")
 
 
 def draw_svm_decision_function(clf, ax=None, **kwargs):
@@ -144,14 +143,15 @@ def draw_svm_decision_function(clf, ax=None, **kwargs):
     Z = clf.decision_function(xy).reshape(X1.shape)
 
     # plot decision boundary and margins
-    label = kwargs.pop('label', 'Decision Boundary')
-    cs = ax.contour(X1, X2, Z, levels=[-1., 0, 1.0], linestyles=['--', '-', '--'], **kwargs)
+    label = kwargs.pop("label", "Decision Boundary")
+    cs = ax.contour(
+        X1, X2, Z, levels=[-1.0, 0, 1.0], linestyles=["--", "-", "--"], **kwargs
+    )
     cs.collections[0].set_label(label)
-    plt.axis('off')
+    plt.axis("off")
 
 
-
-def draw_decision_boundaries(knn, ax=None, cmap='winter', alpha=0.07, **kwargs):
+def draw_decision_boundaries(knn, ax=None, cmap="winter", alpha=0.07, **kwargs):
     if not ax:
         ax = plt.gca()
 
@@ -164,11 +164,11 @@ def draw_decision_boundaries(knn, ax=None, cmap='winter', alpha=0.07, **kwargs):
     xy = np.vstack([X1.ravel(), X2.ravel()]).T
     Z = knn.predict(xy).reshape(X1.shape)
 
-    label = kwargs.pop('label', 'Decision Boundary')
+    label = kwargs.pop("label", "Decision Boundary")
     # plot decision boundary and margins
-    cs = ax.contourf(X1, X2, Z, **kwargs, cmap=cmap, alpha=alpha,)
+    cs = ax.contourf(X1, X2, Z, **kwargs, cmap=cmap, alpha=alpha)
     cs.collections[0].set_label(label)
-    plt.axis('off')
+    plt.axis("off")
 
 
 def draw_decision_surface(clf, predictions, label=None):
@@ -182,13 +182,29 @@ def draw_decision_surface(clf, predictions, label=None):
     xy = np.vstack([X1.ravel(), X2.ravel()]).T
     Z = clf.predict_proba(xy)[:, 1].reshape(X1.shape)
 
-    plt.imshow(Z, extent=[x_low, x_high, y_low, y_high], cmap='GnBu', origin='lower', vmin=0, vmax=1)
+    plt.imshow(
+        Z,
+        extent=[x_low, x_high, y_low, y_high],
+        cmap="GnBu",
+        origin="lower",
+        vmin=0,
+        vmax=1,
+    )
     plt.grid()
     plt.colorbar(label=label)
-    plt.axis('off')
+    plt.axis("off")
 
 
-def plot_bars_and_confusion(truth, prediction, axes=None, vmin=None, vmax=None, cmap='RdPu', title=None, bar_color=None):
+def plot_bars_and_confusion(
+    truth,
+    prediction,
+    axes=None,
+    vmin=None,
+    vmax=None,
+    cmap="RdPu",
+    title=None,
+    bar_color=None,
+):
     accuracy = accuracy_score(truth, prediction)
     cm = confusion_matrix(truth, prediction)
 
@@ -217,20 +233,20 @@ def plot_bars_and_confusion(truth, prediction, axes=None, vmin=None, vmax=None, 
     else:
         correct.value_counts().plot.barh(ax=axes[0], color=bar_color)
 
-    axes[0].text(150, 0.5, 'Accuracy {:0.3f}'.format(accuracy))
+    axes[0].text(150, 0.5, "Accuracy {:0.3f}".format(accuracy))
 
     sns.heatmap(
         cm,
         annot=True,
-        fmt='d',
+        fmt="d",
         cmap=cmap,
-        xticklabels=['No', 'Yes'],
-        yticklabels=['No', 'Yes'],
+        xticklabels=["No", "Yes"],
+        yticklabels=["No", "Yes"],
         ax=axes[1],
         vmin=vmin,
         vmax=vmax,
     )
-    axes[1].set_ylabel('Actual')
-    axes[1].set_xlabel('Predicted')
+    axes[1].set_ylabel("Actual")
+    axes[1].set_xlabel("Predicted")
     if title:
         plt.suptitle(title)
