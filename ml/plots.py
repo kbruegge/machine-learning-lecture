@@ -6,14 +6,19 @@ import collections
 import seaborn as sns
 import numpy as np
 import pandas as pd
-from matplotlib.colors import LinearSegmentedColormap
+from matplotlib.colors import ListedColormap, to_hex
+
+
+colors = ['xkcd:sky', 'xkcd:grass']
+cmap = ListedColormap(colors)
 
 
 def set_plot_style():
 
     sns.reset_orig()
 
-    plt.rcParams["figure.figsize"] = (12, 8)
+    plt.rcParams["figure.figsize"] = (9.8, 9.8 / 3 * 2)
+    plt.rcParams["figure.dpi"] = 100
     plt.rcParams["font.size"] = 14
     plt.rcParams["lines.linewidth"] = 2
     plt.rcParams["xtick.labelsize"] = 13
@@ -57,15 +62,11 @@ def draw_linear_regression_function(reg, ax=None, **kwargs):
     ax.plot(x1s, x2s, **kwargs)
 
 
-def plot_3d_views(X, y, cmap=None):
-    from mpl_toolkits.mplot3d import Axes3D
+def plot_3d_views(X, y, cmap=cmap):
+    from mpl_toolkits.mplot3d import Axes3D  # noqa
 
-    if not cmap:
-        cmap = LinearSegmentedColormap.from_list(
-            "discrete", colors=[(0.8, 0.2, 0.3), (0.1, 0.8, 0.3), (0, 0.4, 0.8)], N=3
-        )
-
-    fig = plt.figure(figsize=(20, 20))
+    w, h = plt.rcParams['figure.figsize']
+    fig = plt.figure(figsize=(w, w))
     ax = fig.add_subplot(2, 2, 1, projection="3d")
     ax.scatter(X[:, 0], X[:, 1], X[:, 2], c=y, cmap=cmap)
     ax.set_xlabel("X1")
@@ -113,7 +114,6 @@ def draw_tree(clf):
     d = tree.export_graphviz(clf, out_file=None, filled=True)
     graph = pydotplus.graph_from_dot_data(d)
 
-    colors = ("red", "dodgerblue")
     edges = collections.defaultdict(list)
 
     for edge in graph.get_edge_list():
@@ -123,7 +123,7 @@ def draw_tree(clf):
         edges[edge].sort()
         for i in range(2):
             dest = graph.get_node(str(edges[edge][i]))[0]
-            dest.set_fillcolor(colors[i])
+            dest.set_fillcolor(to_hex(colors[i]))
 
     return graph.create(format="png")
 
