@@ -26,3 +26,4 @@ dependencies:
   - xlrd>=1
   - pip:
     - jupyter_contrib_nbextensions
+    - pyfact
