@@ -19,6 +19,7 @@ dependencies:
   - pytables
   - pytables=3.5
   - python-graphviz=0.8
+  - scikit-image
   - scikit-learn=0.23
   - scipy=1.4
   - seaborn=0.10
