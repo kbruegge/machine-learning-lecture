@@ -15,3 +15,13 @@ As of now, you need to execute this notebook within the project folder since it 
 
 The programming code examples in this material are shared under the GnuGPLv3 license.
 The lecture material (e.g. jupyter notebooks) are shared under the Creative Commons Attribution-NonCommercial License: https://creativecommons.org/licenses/by-nc/4.0/legalcode.txt, so they cannot be used for commercial training / tutorials / lectures.
+
+
+## Lectures
+
+1. Data-Preprocessing and feature selection (smd_pca.ipynb)
+2. Introduction to supervised machine learning (smd_ml.ipynb, part 1)
+3. Validation, Bias-Variance-Tradeoff, ensemble methods (smd_ml.ipynb, part 2)
+4. Unsupervised learning, clustering (smd_unsupervised.ipynb)
+5. Example on FACT Data and Boosting (smd_fact_boosting.ipynb)
+6. Neural Networks (smd_neural_networks.ipynb)
