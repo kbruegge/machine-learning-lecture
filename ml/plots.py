@@ -9,7 +9,7 @@ import pandas as pd
 from matplotlib.colors import ListedColormap, to_hex
 
 
-colors = ['xkcd:sky', 'xkcd:grass']
+colors = ['xkcd:red', 'xkcd:blue']
 cmap = ListedColormap(colors)
 
 
@@ -21,11 +21,11 @@ def set_plot_style():
     plt.rcParams["figure.dpi"] = 100
     plt.rcParams["font.size"] = 14
     plt.rcParams["lines.linewidth"] = 2
-    plt.rcParams["xtick.labelsize"] = 13
-    plt.rcParams["ytick.labelsize"] = 13
-    plt.rcParams["axes.labelsize"] = 14
-    plt.rcParams["axes.titlesize"] = 14
-    plt.rcParams["legend.fontsize"] = 13
+    # plt.rcParams["xtick.labelsize"] = 13
+    # plt.rcParams["ytick.labelsize"] = 13
+    # plt.rcParams["axes.labelsize"] = 14
+    # plt.rcParams["axes.titlesize"] = 14
+    # plt.rcParams["legend.fontsize"] = 13
     plt.rcParams["axes.spines.top"] = False
     plt.rcParams["axes.spines.right"] = False
 
@@ -65,48 +65,21 @@ def draw_linear_regression_function(reg, ax=None, **kwargs):
 def plot_3d_views(X, y, cmap=cmap):
     from mpl_toolkits.mplot3d import Axes3D  # noqa
 
-    w, h = plt.rcParams['figure.figsize']
-    fig = plt.figure(figsize=(w, w))
-    ax = fig.add_subplot(2, 2, 1, projection="3d")
-    ax.scatter(X[:, 0], X[:, 1], X[:, 2], c=y, cmap=cmap)
-    ax.set_xlabel("X1")
-    ax.set_ylabel("X2")
-    ax.set_zlabel("X3")
-    ax.set_xticklabels([])
-    ax.set_yticklabels([])
-    ax.set_zticklabels([])
+    fig, axs = plt.subplots(2, 2, subplot_kw={'projection': '3d'}, constrained_layout=False)
 
-    ax = fig.add_subplot(2, 2, 2, projection="3d")
-    ax.scatter(X[:, 0], X[:, 1], X[:, 2], c=y, cmap=cmap)
-    ax.view_init(0, 0)
-    ax.set_xlabel("X1")
-    ax.set_ylabel("X2")
-    ax.set_zlabel("X3")
-    ax.set_xticklabels([])
-    ax.set_yticklabels([])
-    ax.set_zticklabels([])
+    for ax in axs.ravel():
+        ax.scatter(X[:, 0], X[:, 1], X[:, 2], c=y, cmap=cmap, lw=0)
+        ax.set_xlabel("X1")
+        ax.set_ylabel("X2")
+        ax.set_zlabel("X3")
+        ax.set_xticklabels([])
+        ax.set_yticklabels([])
+        ax.set_zticklabels([])
 
-    ax = fig.add_subplot(2, 2, 3, projection="3d")
-    ax.scatter(X[:, 0], X[:, 1], X[:, 2], c=y, cmap=cmap)
-    ax.view_init(0, 90)
-    ax.set_xlabel("X1")
-    ax.set_ylabel("X2")
-    ax.set_zlabel("X3")
-    ax.set_xticklabels([])
-    ax.set_yticklabels([])
-    ax.set_zticklabels([])
-
-    ax = fig.add_subplot(2, 2, 4, projection="3d")
-    ax.scatter(X[:, 0], X[:, 1], X[:, 2], c=y, cmap=cmap)
-    ax.view_init(90, 0)
-    ax.set_xlabel("X1")
-    ax.set_ylabel("X2")
-    ax.set_zlabel("X3")
-    ax.set_xticklabels([])
-    ax.set_yticklabels([])
-    ax.set_zticklabels([])
-    plt.subplots_adjust(wspace=0.005, hspace=0.005)
-
+    axs[0, 1].view_init(0, 0)
+    axs[1, 0].view_init(0, 90)
+    axs[1, 1].view_init(90, 0)
+    fig.subplots_adjust(wspace=0.005, hspace=0.005)
 
 def draw_tree(clf):
     import pydotplus
