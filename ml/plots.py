@@ -14,18 +14,11 @@ cmap = ListedColormap(colors)
 
 
 def set_plot_style():
-
     sns.reset_orig()
-
-    plt.rcParams["figure.figsize"] = (9.8, 9.8 / 3 * 2)
+    plt.rcParams["figure.figsize"] = (9.23, 9.23 / 3 * 2)
     plt.rcParams["figure.dpi"] = 100
     plt.rcParams["font.size"] = 14
     plt.rcParams["lines.linewidth"] = 2
-    # plt.rcParams["xtick.labelsize"] = 13
-    # plt.rcParams["ytick.labelsize"] = 13
-    # plt.rcParams["axes.labelsize"] = 14
-    # plt.rcParams["axes.titlesize"] = 14
-    # plt.rcParams["legend.fontsize"] = 13
     plt.rcParams["axes.spines.top"] = False
     plt.rcParams["axes.spines.right"] = False
 
