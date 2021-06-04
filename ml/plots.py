@@ -9,7 +9,7 @@ import pandas as pd
 from matplotlib.colors import ListedColormap, to_hex
 
 
-colors = ['xkcd:red', 'xkcd:blue']
+colors = ['xkcd:sky', 'xkcd:grass']
 cmap = ListedColormap(colors)
 
 
@@ -167,7 +167,7 @@ def plot_bars_and_confusion(
     axes=None,
     vmin=None,
     vmax=None,
-    cmap="RdPu",
+    cmap='inferno',
     title=None,
     bar_color=None,
 ):
@@ -186,7 +186,7 @@ def plot_bars_and_confusion(
     prediction.sort_index(inplace=True)
 
     if not axes:
-        fig, axes = plt.subplots(1, 2, figsize=(10, 4))
+        fig, axes = plt.subplots(1, 2)
 
     if not vmin:
         vmin = cm.min()
