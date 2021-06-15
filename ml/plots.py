@@ -180,7 +180,7 @@ def plot_bars_and_confusion(
     if not isinstance(prediction, pd.Series):
         prediction = pd.Series(prediction)
 
-    correct = pd.Series(truth.values == prediction.values)
+    correct = pd.Series(np.where(truth.values == prediction.values, 'Correct', 'Wrong'))
 
     truth.sort_index(inplace=True)
     prediction.sort_index(inplace=True)
