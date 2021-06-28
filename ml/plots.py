@@ -17,6 +17,7 @@ def set_plot_style():
     sns.reset_orig()
     plt.rcParams["figure.figsize"] = (9.23, 9.23 / 3 * 2)
     plt.rcParams["figure.dpi"] = 100
+    plt.rcParams["figure.max_open_warning"] = 50
     plt.rcParams["font.size"] = 14
     plt.rcParams["lines.linewidth"] = 2
     plt.rcParams["axes.spines.top"] = False
