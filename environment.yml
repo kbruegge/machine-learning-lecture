@@ -11,6 +11,7 @@ dependencies:
   - jupyter
   - jupyterlab
   - conda-forge::matplotlib=3.4
+  - conda-forge::iminuit
   - notebook
   - ipympl
   - numpy=1.20
