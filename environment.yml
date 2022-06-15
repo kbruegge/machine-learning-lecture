@@ -31,4 +31,4 @@ dependencies:
   - xlrd
   - pillow
   - jupyter_contrib_nbextensions
-  - ctapipe=0.14
+  - ctapipe=0.15
