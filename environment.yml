@@ -16,7 +16,7 @@ dependencies:
   - numdifftools
   - notebook
   - ipympl
-  - numpy
+  - numpy=1.21
   - pandas
   - pip
   - pydotplus
