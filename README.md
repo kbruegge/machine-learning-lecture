@@ -1,4 +1,4 @@
-# A machine learning lecture <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a> [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/tudo-astroparticlephysics/machine-learning-lecture/master) 
+# A machine learning lecture <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a> [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/tudo-astroparticlephysics/machine-learning-lecture/main) 
 
 This collection of notebooks was started for a lecture on machine learning at the Universitat Autònoma de Barcelona.
 It has since grown into a large part of the statistical methods lecture (SMD) at the Physics department at TU Dortmund University.
