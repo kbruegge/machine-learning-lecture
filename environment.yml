@@ -16,7 +16,7 @@ dependencies:
   - numdifftools
   - notebook
   - ipympl
-  - numpy=1.21
+  - numpy
   - pandas
   - pip
   - pydotplus
@@ -32,3 +32,6 @@ dependencies:
   - pillow
   - jupyter_contrib_nbextensions
   - ctapipe=0.15
+  - pytorch
+  - pytorch-gpu
+  - torchvision
