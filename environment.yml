@@ -11,7 +11,7 @@ dependencies:
   - ipympl
   - jupyter
   - jupyterlab
-  - matplotlib=3.5
+  - matplotlib=3.7
   - iminuit
   - numdifftools
   - notebook
@@ -31,7 +31,7 @@ dependencies:
   - xlrd
   - pillow
   - jupyter_contrib_nbextensions
-  - ctapipe=0.15
+  - ctapipe=0.19
   - pytorch
   - pytorch-gpu
   - torchvision
