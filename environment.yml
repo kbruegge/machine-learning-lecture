@@ -39,3 +39,4 @@ dependencies:
   - torchvision
   - tqdm
   - xlrd
+  - mrmr_selection
