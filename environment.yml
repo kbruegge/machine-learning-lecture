@@ -16,6 +16,7 @@ dependencies:
   - jupyter
   - jupyter_contrib_nbextensions
   - jupyterlab
+  - keras
   - matplotlib=3.8
   - notebook
   - numba
